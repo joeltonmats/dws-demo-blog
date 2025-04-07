@@ -1,4 +1,7 @@
-// src/styles/theme.ts
+/**
+ * This the customized theme, and it was necessary to  create a definition  for typescript purpose
+ *
+ */
 
 export const theme = {
   colors: {
