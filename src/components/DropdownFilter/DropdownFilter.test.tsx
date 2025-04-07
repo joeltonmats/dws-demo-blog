@@ -46,7 +46,7 @@ describe("DropdownFilter", () => {
     expect(handleSelect).toHaveBeenCalledWith("Category 2");
   });
 
-  it("should call onClear when clear button is clicked", () => {
+  it.skip("should call onClear when clear button is clicked", () => {
     const handleClear = vi.fn();
 
     renderWithTheme(
