@@ -13,7 +13,7 @@ export const initialPostState: PostState = {
 
 export const postReducer = (
   state: PostState,
-  action: PostAction
+  action: PostAction,
 ): PostState => {
   switch (action.type) {
     case "SET_POSTS":

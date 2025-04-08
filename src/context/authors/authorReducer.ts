@@ -13,7 +13,7 @@ export const initialAuthorState: AuthorState = {
 
 export const authorReducer = (
   state: AuthorState,
-  action: AuthorAction
+  action: AuthorAction,
 ): AuthorState => {
   switch (action.type) {
     case "SET_AUTHORS":
