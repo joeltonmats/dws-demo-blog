@@ -5,25 +5,38 @@ import PostCard from "../PostCard";
 
 interface PostListProps {
   posts: Post[];
+  onClickPost?: (id: string) => void;
 }
 
-const ListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+const GridWrapper = styled.div`
+  display: grid;
   gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const PostList: React.FC<PostListProps> = ({ posts }) => {
+const PostList: React.FC<PostListProps> = ({ posts, onClickPost }) => {
   if (!posts.length) {
     return <p>No posts found.</p>;
   }
 
   return (
-    <ListWrapper>
+    <GridWrapper>
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard
+          key={post.id}
+          post={post}
+          onClick={() => onClickPost?.(post.id)}
+        />
       ))}
-    </ListWrapper>
+    </GridWrapper>
   );
 };
 
