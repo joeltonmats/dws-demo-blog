@@ -29,7 +29,7 @@ const PostDetailsPage: React.FC = () => {
 
   return (
     <>
-      <Header showSearch />
+      <Header />
       <Wrapper>
         <ContentContainer>
           <SideColumn>
