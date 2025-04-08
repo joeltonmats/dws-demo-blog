@@ -31,7 +31,7 @@ export const LabelStyled = styled.span`
 `;
 
 export const DropdownStyled = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.colors.neutrals.lightest};
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   padding: 16px;

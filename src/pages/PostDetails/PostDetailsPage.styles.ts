@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  background: linear-gradient(180deg, #efc4b4 0%, #00bfc1 100%);
   padding: 16px;
 
   @media (min-width: 1024px) {

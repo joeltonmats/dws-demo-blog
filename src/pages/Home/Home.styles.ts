@@ -83,7 +83,7 @@ export const ControlsWrapper = styled.div`
     align-items: baseline;
     display: flex;
     justify-content: space-between;
-    padding: 32px 56px 0;
+    padding: 0 56px 0;
   }
 `;
 

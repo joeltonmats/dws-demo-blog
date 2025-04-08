@@ -5,7 +5,7 @@ export const ItemStyled = styled.div<{ selected: boolean }>`
   cursor: pointer;
   font-size: ${({ theme }) => theme.typography.sizes.bodySmall};
   font-weight: ${({ theme }) => theme.typography.weights.regular};
-  padding: 8px 0;
+  padding: 8px 0 8px 8px;
   width: 100%;
 
   &:hover {

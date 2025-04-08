@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CardStyled = styled.article`
-  background: white;
+  background: ${({ theme }) => theme.colors.neutrals.lightest};
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
