@@ -10,6 +10,7 @@ import {
   Meta,
   Title,
 } from "./PostDetails.styles";
+import texts from "../../constants/constants";
 
 interface PostDetailsProps {
   post: Post;
@@ -23,7 +24,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
       <Meta>
         <Avatar src={post.author.profilePicture} alt={post.author.name} />
         <span>
-          Written by <strong>{post.author.name}</strong>
+          {texts.post.by} <strong>{post.author.name}</strong>
         </span>
         <span>{formatDate(post.createdAt)}</span>
       </Meta>

@@ -24,11 +24,11 @@ export const ContentStyled = styled.div`
 `;
 
 export const MetaStyled = styled.div`
-  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
   color: ${({ theme }) => theme.colors.neutrals.extraDark};
+  display: flex;
+  font-size: 0.75rem;
+  gap: 8px;
 `;
 
 export const DotStyled = styled.span`

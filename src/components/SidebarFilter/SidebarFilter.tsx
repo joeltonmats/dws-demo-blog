@@ -8,6 +8,7 @@ import {
   Title,
   Wrapper,
 } from "./SidebarFilter.styles";
+import texts from "../../constants/constants";
 
 interface SidebarFilterProps {
   authors: string[];
@@ -32,11 +33,11 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
     <Wrapper>
       <Header>
         <SlidersHorizontal size={18} />
-        Filters
+        {texts.sidebar.title}
       </Header>
 
       <Section>
-        <Title>Category</Title>
+        <Title> {texts.sidebar.category}</Title>
         {categories.map((cat, i) => (
           <>
             <FilterItem
@@ -51,7 +52,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
       </Section>
 
       <Section>
-        <Title>Author</Title>
+        <Title> {texts.sidebar.author}</Title>
         {authors.map((auth, i) => (
           <>
             <FilterItem
@@ -65,7 +66,9 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
         ))}
       </Section>
 
-      <ButtonStyled onClick={onApplyFilters}>Apply filters</ButtonStyled>
+      <ButtonStyled onClick={onApplyFilters}>
+        {texts.sidebar.apply}
+      </ButtonStyled>
     </Wrapper>
   );
 };

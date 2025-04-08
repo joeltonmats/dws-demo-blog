@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
-import PostCard from "../PostCard";
+import PostCard from "../Post/PostCard";
 import { theme } from "../../styles/theme";
 
 const mockPost = {
@@ -30,7 +30,7 @@ describe("PostCard", () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
         <PostCard post={mockPost} />
-      </ThemeProvider>,
+      </ThemeProvider>
     );
 
     expect(getByText("Test Post")).toBeInTheDocument();

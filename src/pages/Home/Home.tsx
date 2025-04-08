@@ -19,6 +19,7 @@ import {
   SortToggle,
   Title,
 } from "./Home.styles";
+import texts from "../../constants/constants";
 
 const HomePage: React.FC = () => {
   const { state: postState } = usePostContext();
@@ -105,11 +106,11 @@ const HomePage: React.FC = () => {
   return (
     <>
       <ControlsWrapper>
-        <Title>DWS blog</Title>
+        <Title>{texts.pages.homeTitle}</Title>
         <SortBar>
-          <span>Sort by:</span>
+          <span>{texts.sort.label}</span>
           <SortToggle onClick={() => setSortNewestFirst(!sortNewestFirst)}>
-            {sortNewestFirst ? "Newest first" : "Oldest first"}
+            {sortNewestFirst ? texts.sort.newest : texts.sort.oldest}
             <ArrowDownUp size={16} />
           </SortToggle>
         </SortBar>
@@ -132,7 +133,7 @@ const HomePage: React.FC = () => {
           {/* Mobile filters */}
           <FiltersWrapper>
             <DropdownFilter
-              label="Category"
+              label={texts.label.category}
               options={allCategories}
               selected={selectedCategories}
               onSelect={handleCategorySelect}
@@ -140,7 +141,7 @@ const HomePage: React.FC = () => {
             />
 
             <DropdownFilter
-              label="Author"
+              label={texts.label.author}
               options={allAuthors}
               selected={selectedAuthors}
               onSelect={handleAuthorSelect}
@@ -148,7 +149,7 @@ const HomePage: React.FC = () => {
             />
 
             <SortToggle onClick={() => setSortNewestFirst(!sortNewestFirst)}>
-              {sortNewestFirst ? "Newest first" : "Oldest first"}
+              {sortNewestFirst ? texts.sort.newest : texts.sort.oldest}
               <ArrowDownUp size={16} />
             </SortToggle>
           </FiltersWrapper>

@@ -9,8 +9,8 @@ import {
   ThumbnailStyled,
   TitleStyled,
 } from "./PostCard.styles";
-import { Post } from "../types";
-import { formatDate } from "../utils/formatDate";
+import { Post } from "../../types";
+import { formatDate } from "../../utils/formatDate";
 
 interface PostCardProps {
   post: Post;

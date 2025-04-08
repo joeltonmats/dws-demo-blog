@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Post } from "../../types";
 import PostList from "../PostList/PostList";
 import { useNavigate } from "react-router-dom";
+import texts from "../../constants/constants";
 
 interface LatestArticlesSectionProps {
   posts: Post[];
@@ -33,7 +34,7 @@ const LatestArticlesSection: React.FC<LatestArticlesSectionProps> = ({
 
   return (
     <Section>
-      <Title>Latest articles</Title>
+      <Title>{texts.post.latestArticle}</Title>
       <PostList posts={posts.slice(0, 4)} onClickPost={handleClick} />
     </Section>
   );

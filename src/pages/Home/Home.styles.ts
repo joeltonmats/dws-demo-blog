@@ -25,9 +25,9 @@ export const ContentWrapper = styled.div`
 `;
 
 export const FiltersWrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px;
   margin-bottom: 24px;
 

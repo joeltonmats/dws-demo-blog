@@ -14,6 +14,8 @@ import {
 } from "./Header.styles";
 import { getAuthors, getCategories } from "../../api/api";
 import { Author, Category } from "../../types";
+import texts from "../../constants/constants";
+import textsHelper from "../../constants/constants.helpers";
 
 const Header: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -58,13 +60,11 @@ const Header: React.FC = () => {
   return (
     <>
       <HeaderWrapper>
-        <LogoStyled>
-          dentsu <span>world services</span>
-        </LogoStyled>
+        <LogoStyled>{textsHelper.header.title()}</LogoStyled>
 
         <SearchDesktopWrapper>
           <SearchInput
-            placeholder="Search..."
+            placeholder={texts.header.searchPlaceholder}
             value={query}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setQuery(e.target.value);
@@ -96,7 +96,7 @@ const Header: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setQuery(e.target.value)
               }
-              placeholder="Search..."
+              placeholder={texts.header.searchPlaceholder}
               onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                 e.key === "Enter" && handleSubmit()
               }
@@ -120,11 +120,11 @@ const Header: React.FC = () => {
               ))
             ) : query.trim().length > 0 && suggestions.length === 0 ? (
               <SuggestionItem onClick={() => handleSuggestionClick()}>
-                {`No Results, Search by ${query}`}
+                {`${texts.searchOverlay.noResults} ${query}`}
               </SuggestionItem>
             ) : (
               <SuggestionItem disabled>
-                {`Start searching to show options`}
+                {texts.searchOverlay.startSearch}
               </SuggestionItem>
             )}
           </SuggestionBox>

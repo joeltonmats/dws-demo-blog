@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import texts from "../../constants/constants";
 
 const Button = styled.button`
   align-items: center;
@@ -16,8 +17,8 @@ const Button = styled.button`
   padding: 12px 16px;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.secondary.dark};
     border-color: ${({ theme }) => theme.colors.secondary.dark};
+    color: ${({ theme }) => theme.colors.secondary.dark};
   }
 `;
 
@@ -25,7 +26,7 @@ const BackButton: React.FC = () => {
   const navigate = useNavigate();
   return (
     <Button onClick={() => navigate("/")}>
-      <ArrowLeft size={20} /> Back
+      <ArrowLeft size={20} /> {texts.buttons.back}
     </Button>
   );
 };
