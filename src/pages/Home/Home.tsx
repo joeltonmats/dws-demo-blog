@@ -6,7 +6,6 @@ import { useAuthorContext } from "../../context/authors/AuthorContext";
 import { useCategoryContext } from "../../context/categories/CategoryContext";
 import { usePostContext } from "../../context/posts/PostContext";
 import DropdownFilter from "../../components/DropdownFilter/DropdownFilter";
-import Header from "../../components/Header/Header";
 import PostList from "../../components/PostList/PostList";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter";
 
@@ -105,8 +104,6 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <Header showSearch />
-
       <ControlsWrapper>
         <Title>DWS blog</Title>
         <SortBar>

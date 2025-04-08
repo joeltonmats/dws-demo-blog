@@ -1,15 +1,14 @@
-import DebugPostContext from "./pages/debug/DebugPostContext";
-import DebugAuthorContext from "./pages/debug/DebugAuthorContext";
-import DebugCategoryContext from "./pages/debug/DebugCategoryContext";
+import { AppContainer } from "./App.styles";
+import Header from "./components/Header/Header";
 import AppRoutes from "./routes/routes";
 
 function App() {
   return (
     <>
-      <AppRoutes />
-      <DebugPostContext />
-      <DebugAuthorContext />
-      <DebugCategoryContext />
+      <Header />
+      <AppContainer>
+        <AppRoutes />
+      </AppContainer>
     </>
   );
 }
