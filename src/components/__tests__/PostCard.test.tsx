@@ -30,7 +30,7 @@ describe("PostCard", () => {
     const { getByText } = render(
       <ThemeProvider theme={theme}>
         <PostCard post={mockPost} />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     expect(getByText("Test Post")).toBeInTheDocument();

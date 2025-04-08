@@ -5,7 +5,7 @@ export const CardStyled = styled.article`
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  width: 314px;
+  width: 100%;
 `;
 
 export const ThumbnailStyled = styled.img`

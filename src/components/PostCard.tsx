@@ -14,12 +14,13 @@ import { formatDate } from "../utils/formatDate";
 
 interface PostCardProps {
   post: Post;
+  onClick?: () => void;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post, onClick }: PostCardProps) {
   const formattedDate = formatDate(post.createdAt);
   return (
-    <CardStyled>
+    <CardStyled onClick={onClick} role="button" tabIndex={0}>
       <ThumbnailStyled src={post.thumbnailUrl} alt={post.title} />
       <ContentStyled>
         <MetaStyled>
