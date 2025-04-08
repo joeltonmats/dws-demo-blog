@@ -22,5 +22,5 @@ createRoot(document.getElementById("root")!).render(
         </PostProvider>
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );

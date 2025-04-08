@@ -1,26 +1,41 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.aside`
-  background: white;
+  background: ${({ theme }) => theme.colors.neutrals.lightest};
   border-radius: 16px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  gap: 24px;
   padding: 24px;
   width: 240px;
 `;
 
-export const Section = styled.div`
+export const Header = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: ${({ theme }) => theme.typography.sizes.bodyLarge};
+  font-weight: ${({ theme }) => theme.typography.weights.bold};
+  gap: 8px;
+  margin-bottom: 12px;
+`;
+
+export const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  margin-bottom: 24px;
 `;
 
 export const Title = styled.h4`
+  color: ${({ theme }) => theme.colors.neutrals.darkest};
   font-size: ${({ theme }) => theme.typography.sizes.bodyLarge};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+`;
+
+export const Divider = styled.div`
+  background-color: ${({ theme }) => theme.colors.neutrals.extraLight};
+  height: 1px;
+  margin: 8px 0;
 `;
 
 export const ButtonStyled = styled.button`

@@ -9,7 +9,7 @@ import DropdownFilter from "../../components/DropdownFilter/DropdownFilter";
 import Header from "../../components/Header/Header";
 import PostList from "../../components/PostList/PostList";
 import SidebarFilter from "../../components/SidebarFilter/SidebarFilter";
-import MainContainer from "../../components/Layout/MainContainer";
+
 import {
   ContentWrapper,
   ControlsWrapper,
@@ -30,9 +30,30 @@ const HomePage: React.FC = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sortNewestFirst, setSortNewestFirst] = useState(true);
 
+  const [tempSelectedAuthors, setTempSelectedAuthors] = useState<string[]>([]);
+  const [tempSelectedCategories, setTempSelectedCategories] = useState<
+    string[]
+  >([]);
+
   const navigate = useNavigate();
 
   /* Handlers */
+  const toggleTempAuthor = (author: string) => {
+    setTempSelectedAuthors((prev) =>
+      prev.includes(author)
+        ? prev.filter((a) => a !== author)
+        : [...prev, author]
+    );
+  };
+
+  const toggleTempCategory = (category: string) => {
+    setTempSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
   const handleCategorySelect = (category: string) => {
     if (!selectedCategories.includes(category)) {
       setSelectedCategories([...selectedCategories, category]);
@@ -45,13 +66,13 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const handleClear = () => {
-    setSelectedAuthors([]);
-    setSelectedCategories([]);
-  };
-
   const handlePostClick = (id: string) => {
     navigate(`/posts/${id}`);
+  };
+
+  const applyFilters = () => {
+    setSelectedAuthors(tempSelectedAuthors);
+    setSelectedCategories(tempSelectedCategories);
   };
 
   const filteredPosts = postState.posts
@@ -77,8 +98,13 @@ const HomePage: React.FC = () => {
     new Set(authorState.authors.map((a) => a.name))
   );
 
+  // useEffect(() => {
+  //   setTempSelectedAuthors(selectedAuthors);
+  //   setTempSelectedCategories(selectedCategories);
+  // }, [selectedAuthors, selectedCategories]);
+
   return (
-    <MainContainer>
+    <>
       <Header showSearch />
 
       <ControlsWrapper>
@@ -98,11 +124,11 @@ const HomePage: React.FC = () => {
           <SidebarFilter
             categories={allCategories}
             authors={allAuthors}
-            selectedCategories={selectedCategories}
-            selectedAuthors={selectedAuthors}
-            onCategorySelect={handleCategorySelect}
-            onAuthorSelect={handleAuthorSelect}
-            onClear={handleClear}
+            selectedCategories={tempSelectedCategories}
+            selectedAuthors={tempSelectedAuthors}
+            onCategorySelect={toggleTempCategory}
+            onAuthorSelect={toggleTempAuthor}
+            onApplyFilters={applyFilters}
           />
         </SidebarWrapper>
         <ContentWrapper>
@@ -133,7 +159,7 @@ const HomePage: React.FC = () => {
           <PostList posts={filteredPosts} onClickPost={handlePostClick} />
         </ContentWrapper>
       </PageWrapper>
-    </MainContainer>
+    </>
   );
 };
 

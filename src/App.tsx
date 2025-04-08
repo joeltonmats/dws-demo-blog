@@ -3,8 +3,6 @@ import DebugAuthorContext from "./pages/debug/DebugAuthorContext";
 import DebugCategoryContext from "./pages/debug/DebugCategoryContext";
 import AppRoutes from "./routes/routes";
 
-import "./App.css";
-
 function App() {
   return (
     <>

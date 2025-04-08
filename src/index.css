@@ -1,0 +1,9 @@
+html,
+body,
+#root {
+  background: linear-gradient(180deg, #fbe2e7 0%, #d4f4ef 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+}

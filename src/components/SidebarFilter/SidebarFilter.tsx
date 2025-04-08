@@ -1,13 +1,20 @@
 import { SlidersHorizontal } from "lucide-react";
 import FilterItem from "../FilterItem/FilterItem";
-import { ButtonStyled, Section, Title, Wrapper } from "./SidebarFilter.styles";
+import {
+  ButtonStyled,
+  Divider,
+  Header,
+  Section,
+  Title,
+  Wrapper,
+} from "./SidebarFilter.styles";
 
 interface SidebarFilterProps {
   authors: string[];
   categories: string[];
   onAuthorSelect: (author: string) => void;
   onCategorySelect: (category: string) => void;
-  onClear: () => void;
+  onApplyFilters: () => void;
   selectedAuthors: string[];
   selectedCategories: string[];
 }
@@ -17,44 +24,48 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
   categories,
   onAuthorSelect,
   onCategorySelect,
-  onClear,
+  onApplyFilters,
   selectedAuthors,
   selectedCategories,
 }) => {
   return (
     <Wrapper>
-      <Section>
-        <Title style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <SlidersHorizontal size={18} />
-          Filters
-        </Title>
-      </Section>
+      <Header>
+        <SlidersHorizontal size={18} />
+        Filters
+      </Header>
 
       <Section>
         <Title>Category</Title>
-        {categories.map((cat) => (
-          <FilterItem
-            key={cat}
-            label={cat}
-            isSelected={selectedCategories.includes(cat)}
-            onClick={() => onCategorySelect(cat)}
-          />
+        {categories.map((cat, i) => (
+          <>
+            <FilterItem
+              key={cat}
+              label={cat}
+              isSelected={selectedCategories.includes(cat)}
+              onClick={() => onCategorySelect(cat)}
+            />
+            {i < categories.length - 1 && <Divider />}
+          </>
         ))}
       </Section>
 
       <Section>
         <Title>Author</Title>
-        {authors.map((auth) => (
-          <FilterItem
-            key={auth}
-            label={auth}
-            isSelected={selectedAuthors.includes(auth)}
-            onClick={() => onAuthorSelect(auth)}
-          />
+        {authors.map((auth, i) => (
+          <>
+            <FilterItem
+              key={auth}
+              label={auth}
+              isSelected={selectedAuthors.includes(auth)}
+              onClick={() => onAuthorSelect(auth)}
+            />
+            {i < authors.length - 1 && <Divider />}
+          </>
         ))}
       </Section>
 
-      <ButtonStyled onClick={onClear}>Apply filters</ButtonStyled>
+      <ButtonStyled onClick={onApplyFilters}>Apply filters</ButtonStyled>
     </Wrapper>
   );
 };
