@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const ContainerStyled = styled.div`
+  flex-shrink: 0;
   position: relative;
-  width: 314px;
+  width: auto;
 `;
 
 export const ButtonStyled = styled.button<{ isOpen: boolean }>`
@@ -20,8 +21,9 @@ export const ButtonStyled = styled.button<{ isOpen: boolean }>`
   font-weight: ${({ theme }) => theme.typography.weights.bold};
   height: 32px;
   justify-content: space-between;
+  min-width: 110px;
   padding: 0 12px;
-  width: 110px;
+  width: auto;
 `;
 
 export const LabelStyled = styled.span`
@@ -52,6 +54,7 @@ export const OptionStyled = styled.li`
   cursor: pointer;
   font-size: ${({ theme }) => theme.typography.sizes.bodySmall};
   padding: 8px 0;
+
   &:hover {
     color: ${({ theme }) => theme.colors.primary.light};
   }
@@ -72,12 +75,12 @@ export const SelectedStyled = styled.div`
 `;
 
 export const ClearButtonStyled = styled.button`
+  align-items: center;
   background: none;
   border: none;
-  padding: 0;
-  margin-left: 8px;
+  color: ${({ theme }) => theme.colors.secondary.medium};
   cursor: pointer;
   display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.secondary.medium};
+  margin-left: 8px;
+  padding: 0;
 `;

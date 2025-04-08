@@ -15,10 +15,10 @@ describe("DropdownFilter", () => {
     renderWithTheme(
       <DropdownFilter
         label="Category"
+        onClear={() => {}}
+        onSelect={() => {}}
         options={options}
         selected={selected}
-        onSelect={() => {}}
-        onClear={() => {}}
       />
     );
 
@@ -33,10 +33,10 @@ describe("DropdownFilter", () => {
     renderWithTheme(
       <DropdownFilter
         label="Category"
+        onClear={() => {}}
+        onSelect={handleSelect}
         options={options}
         selected={selected}
-        onSelect={handleSelect}
-        onClear={() => {}}
       />
     );
 
@@ -52,10 +52,10 @@ describe("DropdownFilter", () => {
     renderWithTheme(
       <DropdownFilter
         label="Category"
+        onClear={handleClear}
+        onSelect={() => {}}
         options={options}
         selected={["Category 1"]}
-        onSelect={() => {}}
-        onClear={handleClear}
       />
     );
 
