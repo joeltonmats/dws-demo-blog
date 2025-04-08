@@ -18,7 +18,7 @@ export const getPosts = async (): Promise<Post[]> => {
 export const getPostById = async (id: string): Promise<Post> => {
   try {
     const response = await axios.get<Post>(`${BASE_URL}/posts/${id}`);
-    return response.data;
+    return normalizePost(response.data);
   } catch (error) {
     console.error("Failed to fetch post", error);
     throw new Error("Unable to load post");
