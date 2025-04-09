@@ -50,14 +50,16 @@ export const ListStyled = styled.ul`
   padding: 0;
 `;
 
-export const OptionStyled = styled.li`
+export const OptionStyled = styled.li<{ $selected?: boolean }>`
+  align-items: center;
+  color: ${({ theme, $selected }) =>
+    $selected ? theme.colors.primary.light : theme.colors.neutrals.extraDark};
   cursor: pointer;
+  display: flex;
   font-size: ${({ theme }) => theme.typography.sizes.bodySmall};
+  font-weight: ${({ $selected }) => ($selected ? 600 : 400)};
+  justify-content: space-between;
   padding: 8px 0;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary.light};
-  }
 `;
 
 export const SelectedStyled = styled.div`
@@ -66,12 +68,25 @@ export const SelectedStyled = styled.div`
   border-radius: 42px;
   color: ${({ theme }) => theme.colors.secondary.medium};
   display: flex;
+  flex-wrap: wrap;
   font-size: ${({ theme }) => theme.typography.sizes.caption};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
-  height: 32px;
+  gap: 8px;
+  height: auto;
   justify-content: space-between;
+  min-height: 32px;
   padding: 0 12px;
-  width: 100%;
+`;
+
+export const SelectedItemsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 0;
+`;
+
+export const SelectedItemStyled = styled.span`
+  background-color: transparent;
 `;
 
 export const ClearButtonStyled = styled.button`

@@ -1,4 +1,4 @@
-import { ChevronDown, X } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 import {
   ButtonStyled,
   ContainerStyled,
@@ -8,8 +8,10 @@ import {
   SelectedStyled,
   ClearButtonStyled,
   LabelStyled,
+  SelectedItemsWrapper,
+  SelectedItemStyled,
 } from "./DropdownFilter.styles";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface DropdownFilterProps {
   label: string;
@@ -27,19 +29,48 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({
   onClear,
 }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
   const toggle = () => setOpen((prev) => !prev);
+  const isSelected = (option: string) => selected.includes(option);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <ContainerStyled>
+    <ContainerStyled ref={ref}>
       {!selected.length ? (
         <ButtonStyled onClick={toggle} isOpen={open}>
           <LabelStyled>{label}</LabelStyled>
           <ChevronDown size={16} />
         </ButtonStyled>
       ) : (
-        <SelectedStyled>
-          <span>{selected.join(", ")}</span>
-          <ClearButtonStyled onClick={onClear}>
+        <SelectedStyled onClick={toggle}>
+          <SelectedItemsWrapper>
+            {selected.map((s, i) => {
+              const extraCharacter = i === selected.length - 1 ? "" : ",";
+
+              return (
+                <SelectedItemStyled
+                  key={s}
+                >{`${s}${extraCharacter}`}</SelectedItemStyled>
+              );
+            })}
+          </SelectedItemsWrapper>
+          <ClearButtonStyled
+            onClick={(e) => {
+              e.stopPropagation();
+              onClear();
+              setOpen(false);
+            }}
+          >
             <X size={16} />
           </ClearButtonStyled>
         </SelectedStyled>
@@ -49,8 +80,13 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({
         <DropdownStyled>
           <ListStyled>
             {options.map((option) => (
-              <OptionStyled key={option} onClick={() => onSelect(option)}>
+              <OptionStyled
+                key={option}
+                onClick={() => onSelect(option)}
+                $selected={isSelected(option)}
+              >
                 {option}
+                {isSelected(option) && <Check size={16} />}
               </OptionStyled>
             ))}
           </ListStyled>
