@@ -4,13 +4,13 @@ export const CardStyled = styled.article`
   background: ${({ theme }) => theme.colors.neutrals.lightest};
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
-  width: 100%;
 `;
 
 export const ThumbnailStyled = styled.img`
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   height: 196px;
   object-fit: cover;
   width: 100%;
@@ -19,7 +19,9 @@ export const ThumbnailStyled = styled.img`
 export const ContentStyled = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 16px;
+  justify-content: space-between;
   padding: 16px;
 `;
 
