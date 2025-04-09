@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 48px;
   margin: 0 auto;
   max-width: 1200px;
 
@@ -35,4 +34,11 @@ export const MainColumn = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+export const Divider = styled.hr`
+  border: none;
+  border-top: 1px solid ${({ theme }) => theme.colors.neutrals.medium};
+  max-width: 800px;
+  width: 100%;
 `;

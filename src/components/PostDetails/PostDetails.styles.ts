@@ -1,19 +1,24 @@
 import styled from "styled-components";
 
 export const Container = styled.article`
-  margin: 0 auto 64px;
+  margin: 24px auto 32px;
   max-width: 800px;
 
   p {
     margin: 0;
   }
+
+  @media (min-width: 1024px) {
+    margin-top: 0;
+  }
 `;
 
 export const Title = styled.h1`
+  color: ${({ theme }) => theme.colors.neutrals.darkest};
   font-size: ${({ theme }) => theme.typography.sizes.h1};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
-  color: ${({ theme }) => theme.colors.neutrals.darkest};
   margin-bottom: 24px;
+  margin-top: 0;
 `;
 
 export const Meta = styled.div`

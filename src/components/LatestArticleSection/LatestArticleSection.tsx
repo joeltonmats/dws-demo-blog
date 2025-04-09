@@ -10,8 +10,8 @@ interface LatestArticlesSectionProps {
 }
 
 const Section = styled.section`
-  margin: 64px auto 0;
-  max-width: 1200px;
+  margin: 32px auto 0;
+  max-width: 800px;
 `;
 
 const Title = styled.h2`
@@ -19,6 +19,7 @@ const Title = styled.h2`
   font-size: ${({ theme }) => theme.typography.sizes.h2};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
   margin-bottom: 32px;
+  margin-top: 0;
 `;
 
 const LatestArticlesSection: React.FC<LatestArticlesSectionProps> = ({

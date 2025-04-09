@@ -9,6 +9,7 @@ import LatestArticlesSection from "../../components/LatestArticleSection/LatestA
 import BackButton from "../../components/BackButton/BackButton";
 import {
   ContentContainer,
+  Divider,
   MainColumn,
   SideColumn,
   Wrapper,
@@ -51,6 +52,7 @@ const PostDetailsPage: React.FC = () => {
           </SideColumn>
           <MainColumn>
             <PostDetails post={post} highlight={highlight} />
+            <Divider />
             <LatestArticlesSection posts={latestPosts} />
           </MainColumn>
         </ContentContainer>
