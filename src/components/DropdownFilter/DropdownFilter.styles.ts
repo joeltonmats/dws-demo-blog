@@ -6,10 +6,10 @@ export const ContainerStyled = styled.div`
   width: auto;
 `;
 
-export const ButtonStyled = styled.button<{ isOpen: boolean }>`
+export const ButtonStyled = styled.button<{ $isOpen: boolean }>`
   align-items: center;
-  background-color: ${({ theme, isOpen }) =>
-    isOpen
+  background-color: ${({ theme, $isOpen }) =>
+    $isOpen
       ? `${theme.colors.secondary.medium}0D`
       : theme.colors.neutrals.lightest};
   border-radius: 42px;

@@ -39,22 +39,21 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
       <Section>
         <Title> {texts.sidebar.category}</Title>
         {categories.map((cat, i) => (
-          <>
+          <div key={cat}>
             <FilterItem
-              key={cat}
               label={cat}
               isSelected={selectedCategories.includes(cat)}
               onClick={() => onCategorySelect(cat)}
             />
             {i < categories.length - 1 && <Divider />}
-          </>
+          </div>
         ))}
       </Section>
 
       <Section>
         <Title> {texts.sidebar.author}</Title>
         {authors.map((auth, i) => (
-          <>
+          <div key={auth}>
             <FilterItem
               key={auth}
               label={auth}
@@ -62,7 +61,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
               onClick={() => onAuthorSelect(auth)}
             />
             {i < authors.length - 1 && <Divider />}
-          </>
+          </div>
         ))}
       </Section>
 

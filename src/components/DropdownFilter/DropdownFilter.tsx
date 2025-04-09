@@ -47,7 +47,7 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({
   return (
     <ContainerStyled ref={ref}>
       {!selected.length ? (
-        <ButtonStyled onClick={toggle} isOpen={open}>
+        <ButtonStyled onClick={toggle} $isOpen={open}>
           <LabelStyled>{label}</LabelStyled>
           <ChevronDown size={16} />
         </ButtonStyled>
