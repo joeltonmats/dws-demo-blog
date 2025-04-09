@@ -58,15 +58,19 @@ const HomePage: React.FC = () => {
   };
 
   const handleCategorySelect = (category: string) => {
-    if (!selectedCategories.includes(category)) {
-      setSelectedCategories([...selectedCategories, category]);
-    }
+    setSelectedCategories((prev) => {
+      return prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category];
+    });
   };
 
   const handleAuthorSelect = (author: string) => {
-    if (!selectedAuthors.includes(author)) {
-      setSelectedAuthors([...selectedAuthors, author]);
-    }
+    setSelectedAuthors((prev) => {
+      return prev.includes(author)
+        ? prev.filter((a) => a !== author)
+        : [...prev, author];
+    });
   };
 
   const handlePostClick = (id: string) => {
