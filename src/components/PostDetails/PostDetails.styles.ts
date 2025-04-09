@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Container = styled.article`
   margin: 0 auto 64px;
   max-width: 800px;
+
+  p {
+    margin: 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -39,4 +43,12 @@ export const Content = styled.div`
   gap: 16px;
   font-size: ${({ theme }) => theme.typography.sizes.bodyLarge};
   color: ${({ theme }) => theme.colors.neutrals.extraDark};
+
+  mark {
+    background: ${({ theme }) => theme.colors.accent.light};
+    color: ${({ theme }) => theme.colors.neutrals.darkest};
+    font-weight: bold;
+    padding: 0 2px;
+    border-radius: 4px;
+  }
 `;

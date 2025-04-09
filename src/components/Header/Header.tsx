@@ -4,18 +4,20 @@ import {
   HeaderWrapper,
   LogoStyled,
   SearchInput,
-  SearchButton,
   SearchDesktopWrapper,
   SearchMobileIcon,
   Overlay,
   OverlayHeader,
   SuggestionBox,
   SuggestionItem,
+  SearchButton,
 } from "./Header.styles";
 import { getAuthors, getCategories } from "../../api/api";
 import { Author, Category } from "../../types";
 import texts from "../../constants/constants";
 import textsHelper from "../../constants/constants.helpers";
+import { useNavigate } from "react-router-dom";
+import { useHeaderContext } from "../../context/header/headerContext";
 
 const Header: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -25,14 +27,38 @@ const Header: React.FC = () => {
   const [suggestions, setSuggestions] = useState<
     { label: string; type: "Author" | "Category" }[]
   >([]);
+  const { context, onSearch } = useHeaderContext();
+
+  const navigate = useNavigate();
+
+  const handleSuggestionClick = (value?: string) => {
+    if (value) {
+      const enhancedValue = value === "RESET" ? "" : value;
+      setQuery(enhancedValue);
+      onSearch?.(enhancedValue);
+    } else {
+      onSearch?.(query);
+    }
+    setOverlayOpen(false);
+  };
+
+  const handleSubmit = () => {
+    onSearch?.(query);
+    setOverlayOpen(false);
+  };
 
   useEffect(() => {
-    getAuthors().then(setAuthors);
-    getCategories().then(setCategories);
-  }, []);
+    if (context === "home") {
+      getAuthors().then(setAuthors);
+      getCategories().then(setCategories);
+    }
+  }, [context]);
 
   useEffect(() => {
-    if (!query) return setSuggestions([]);
+    if (context !== "home" || !query) {
+      setSuggestions([]);
+      return;
+    }
 
     const q = query.toLowerCase();
     const filtered = [
@@ -44,23 +70,18 @@ const Header: React.FC = () => {
         .map((c) => ({ label: c.name, type: "Category" as const })),
     ];
     setSuggestions(filtered);
-  }, [query, authors, categories]);
+  }, [query, context, authors, categories]);
 
-  const handleSuggestionClick = (value?: string) => {
-    if (value) {
-      setQuery(value);
-    }
-    setOverlayOpen(false);
-  };
-
-  const handleSubmit = () => {
-    alert(`Search: ${query}`);
-  };
+  useEffect(() => {
+    return () => setQuery("");
+  }, []);
 
   return (
     <>
       <HeaderWrapper>
-        <LogoStyled>{textsHelper.header.title()}</LogoStyled>
+        <LogoStyled onClick={() => navigate("/")} role="button" tabIndex={0}>
+          {textsHelper.header.title()}
+        </LogoStyled>
 
         <SearchDesktopWrapper>
           <SearchInput
@@ -68,15 +89,20 @@ const Header: React.FC = () => {
             value={query}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setQuery(e.target.value);
-              setOverlayOpen(true);
+              if (context === "home") {
+                setOverlayOpen(true);
+              }
             }}
             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
               e.key === "Enter" && handleSubmit()
             }
           />
-          <SearchButton onClick={handleSubmit}>
-            <Search size={20} />
-          </SearchButton>
+
+          {context === "post" && (
+            <SearchButton onClick={handleSubmit}>
+              <Search size={20} />
+            </SearchButton>
+          )}
         </SearchDesktopWrapper>
 
         <SearchMobileIcon onClick={() => setOverlayOpen(true)}>
@@ -102,14 +128,19 @@ const Header: React.FC = () => {
               }
             />
             {query && (
-              <button onClick={() => setQuery("")}>
+              <button
+                onClick={() => {
+                  handleSuggestionClick("RESET");
+                  setQuery("");
+                }}
+              >
                 <X size={20} />
               </button>
             )}
           </OverlayHeader>
 
           <SuggestionBox>
-            {suggestions.length > 0 ? (
+            {context === "home" && suggestions.length > 0 ? (
               suggestions.map((s, i) => (
                 <SuggestionItem
                   key={i}
@@ -120,11 +151,15 @@ const Header: React.FC = () => {
               ))
             ) : query.trim().length > 0 && suggestions.length === 0 ? (
               <SuggestionItem onClick={() => handleSuggestionClick()}>
-                {`${texts.searchOverlay.noResults} ${query}`}
+                {context === "home"
+                  ? `${texts.searchOverlay.noResults} ${query}`
+                  : `${texts.searchOverlay.select} ${query}`}
               </SuggestionItem>
             ) : (
               <SuggestionItem disabled>
-                {texts.searchOverlay.startSearch}
+                {context === "home"
+                  ? texts.searchOverlay.startSearch
+                  : texts.searchOverlay.startSearchWithoutSuggestion}
               </SuggestionItem>
             )}
           </SuggestionBox>

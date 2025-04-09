@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowDownUp } from "lucide-react";
 
@@ -20,11 +20,13 @@ import {
   Title,
 } from "./Home.styles";
 import texts from "../../constants/constants";
+import { useHeaderContext } from "../../context/header/headerContext";
 
 const HomePage: React.FC = () => {
   const { state: postState } = usePostContext();
   const { state: authorState } = useAuthorContext();
   const { state: categoryState } = useCategoryContext();
+  const { setContext, setOnSearch } = useHeaderContext();
 
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -34,6 +36,7 @@ const HomePage: React.FC = () => {
   const [tempSelectedCategories, setTempSelectedCategories] = useState<
     string[]
   >([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -80,10 +83,19 @@ const HomePage: React.FC = () => {
       const matchAuthor =
         selectedAuthors.length === 0 ||
         selectedAuthors.includes(post.author.name);
+
       const matchCategory =
         selectedCategories.length === 0 ||
         post.categories.some((c) => selectedCategories.includes(c.name));
-      return matchAuthor && matchCategory;
+
+      const matchSearch =
+        !searchQuery ||
+        post.author.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.categories.some((cat) =>
+          cat.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+      return matchAuthor && matchCategory && matchSearch;
     })
     .sort((a, b) => {
       const dateA = new Date(a.createdAt).getTime();
@@ -98,10 +110,18 @@ const HomePage: React.FC = () => {
     new Set(authorState.authors.map((a) => a.name))
   );
 
-  // useEffect(() => {
-  //   setTempSelectedAuthors(selectedAuthors);
-  //   setTempSelectedCategories(selectedCategories);
-  // }, [selectedAuthors, selectedCategories]);
+  /* Hooks Callbacks, Effects */
+
+  const searchHandler = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
+
+  useEffect(() => {
+    setContext("home");
+    setOnSearch(() => searchHandler);
+
+    return () => setOnSearch(undefined);
+  }, [setContext, setOnSearch, searchHandler]);
 
   return (
     <>

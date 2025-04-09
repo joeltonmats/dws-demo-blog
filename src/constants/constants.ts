@@ -26,10 +26,12 @@ const texts = {
     clear: "Clear",
   },
   searchOverlay: {
-    noResults: "No results, search by",
-    startSearch: "Start searching to show options",
+    noResults: "No suggestion, select to search by",
+    startSearch: "Start searching to show the options.",
+    startSearchWithoutSuggestion: "Start typing to searching.",
     categoryPrefix: "Category:",
     authorPrefix: "Author:",
+    select: "Select to find the text: ",
   },
   pages: {
     homeTitle: "DWS blog",

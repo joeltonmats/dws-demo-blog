@@ -26,6 +26,7 @@ export const LogoStyled = styled.div`
   color: ${({ theme }) => theme.colors.primary.light};
   font-size: 1.25rem;
   font-weight: bold;
+  cursor: pointer;
 
   span {
     font-weight: normal;

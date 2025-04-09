@@ -14,9 +14,23 @@ import texts from "../../constants/constants";
 
 interface PostDetailsProps {
   post: Post;
+  highlight?: string;
 }
 
-const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
+const PostDetails: React.FC<PostDetailsProps> = ({ post, highlight }) => {
+  const getHighlightedText = (text: string, highlight?: string) => {
+    if (!highlight) return text;
+
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+    return parts.map((part, i) =>
+      part.toLowerCase() === highlight.toLowerCase() ? (
+        <mark key={i}>{part}</mark>
+      ) : (
+        part
+      )
+    );
+  };
+
   return (
     <Container>
       <Title>{post.title}</Title>
@@ -32,9 +46,12 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post }) => {
       <CoverImage src={post.thumbnailUrl} alt={post.title} />
 
       <Content>
-        {post.content.split("\n").map((para, index) => (
-          <p key={index}>{para}</p>
-        ))}
+        {post.content
+          .split("\n")
+          .map(
+            (para, index) =>
+              para && <p key={index}>{getHighlightedText(para, highlight)}</p>
+          )}
       </Content>
     </Container>
   );
