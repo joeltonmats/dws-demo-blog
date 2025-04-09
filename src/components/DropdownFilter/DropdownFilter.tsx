@@ -65,6 +65,7 @@ const DropdownFilter: React.FC<DropdownFilterProps> = ({
             })}
           </SelectedItemsWrapper>
           <ClearButtonStyled
+            aria-label="Clear selected filters"
             onClick={(e) => {
               e.stopPropagation();
               onClear();

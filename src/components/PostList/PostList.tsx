@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Post } from "../../types";
 import PostCard from "../Post/PostCard";
-import texts from "../../constants/constants";
+import NoPostsFound from "../NoPostsFound/NoPostsFound";
 
 interface PostListProps {
   posts: Post[];
@@ -25,7 +25,7 @@ const GridWrapper = styled.div`
 
 const PostList: React.FC<PostListProps> = ({ posts, onClickPost }) => {
   if (!posts.length) {
-    return <p>{texts.post.notFound}</p>;
+    return <NoPostsFound />;
   }
 
   return (

@@ -46,7 +46,7 @@ describe("DropdownFilter", () => {
     expect(handleSelect).toHaveBeenCalledWith("Category 2");
   });
 
-  it.skip("should call onClear when clear button is clicked", () => {
+  it("should call onClear when clear button is clicked", () => {
     const handleClear = vi.fn();
 
     renderWithTheme(
@@ -58,9 +58,10 @@ describe("DropdownFilter", () => {
         selected={["Category 1"]}
       />
     );
+    fireEvent.click(screen.getByText("Category 1"));
 
-    fireEvent.click(screen.getByRole("button"));
-    fireEvent.click(screen.getByRole("button", { name: /x/i }));
+    const clearBtn = screen.getByLabelText("Clear selected filters");
+    fireEvent.click(clearBtn);
 
     expect(handleClear).toHaveBeenCalled();
   });
